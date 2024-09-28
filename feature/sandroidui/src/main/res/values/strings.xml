@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_theme_light">Light</string>
+    <string name="title_theme_dark">Dark</string>
+    <string name="title_theme_system_default">Auto</string>
+
+    <string name="title_action_color">Action color</string>
+
+    <string name="title_appearance">Appearance</string>
+
+    <string name="title_use_dynamic_theme">Use dynamic theme</string>
+</resources>
