@@ -94,7 +94,27 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+}
 
+afterEvaluate {
+    publishing{
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "com.androidai.framework.theme"
+                artifactId = "sandroid-ui"
+                version = "1.0.0"
+
+                afterEvaluate {
+                    from(components["release"])
+                }
+            }
+        }
+    }
 }
 
 task("testClasses").doLast {
