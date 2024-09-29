@@ -17,5 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "SAndroidUITheme"
 include(":app")
 include(":sandroiduitheme")
-include(":feature")
 include(":feature:sandroidui")

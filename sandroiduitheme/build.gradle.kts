@@ -15,10 +15,9 @@ kotlin {
     android {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "17"
+                jvmTarget = "1.8"
             }
         }
-        publishLibraryVariants("release")
     }
 
 
@@ -81,9 +80,9 @@ kotlin {
 
 android {
     namespace = "com.androidai.framework.theme.sandroid.ui"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
     }
 
     buildFeatures {
