@@ -36,7 +36,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.atomicfu)
-                api(libs.datastore.core)
+                api(libs.datastore.pref)
             }
         }
         val commonTest by getting {
