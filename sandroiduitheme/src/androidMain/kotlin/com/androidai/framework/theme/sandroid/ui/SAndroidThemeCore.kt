@@ -16,13 +16,14 @@ object SAndroidThemeCore {
     fun init(
             context : Context,
             defaultThemeInfo : DefaultThemeInfo = DefaultThemeInfo.getDefault()) {
-        val datastore = getDataStore(context)
+        // val datastore = getDataStore(context)
+        val settings = getSettingsFactory(context).create("theme_settings")
         isNightMode = {
             context.resources.configuration.uiMode.and(
                     Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
         }
         sAndroidUIDefaults = SAndroidUIDefaults(context)
-        themeRepository = ThemeRepository.getInstance(defaultThemeInfo, datastore)
+        themeRepository = ThemeRepository.getInstance(defaultThemeInfo, settings)
     }
 
     fun updateIsNightMode(isNightMode : (() -> Boolean)) {

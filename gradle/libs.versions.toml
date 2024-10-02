@@ -18,7 +18,8 @@ composeMaterial = "1.4.0"
 composeMaterial3 = "1.0.1"
 composeConstraintLayout = "1.0.1"
 composeActivity = "1.8.0"
-datastoreVersion = "1.1.1"
+datastoreVersion = "1.1.0"
+securityCryptoKtx = "1.0.0"
 
 
 [libraries]
@@ -43,6 +44,7 @@ compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref 
 
 datastore= { group = "androidx.datastore", name = "datastore", version.ref = "datastoreVersion"}
 datastore_pref = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastoreVersion"}
+androidx-security-crypto-ktx = { group = "androidx.security", name = "security-crypto-ktx", version.ref = "securityCryptoKtx" }
 
 
 [plugins]

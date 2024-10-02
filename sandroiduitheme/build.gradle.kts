@@ -36,8 +36,11 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.atomicfu)
-                implementation(libs.datastore.pref)
-                implementation(libs.datastore)
+              //  implementation(libs.datastore.pref)
+              //  implementation(libs.datastore)
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+                implementation("com.russhwolf:multiplatform-settings:1.0.0")
+                implementation("com.russhwolf:multiplatform-settings-no-arg:1.0.0")
             }
         }
         val commonTest by getting {
@@ -94,28 +97,24 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
 }
 
-afterEvaluate {
+
+/*afterEvaluate {
     publishing{
         publications {
-            create<MavenPublication>("release") {
+            create<MavenPublication>("kotlinMultiplatform") {
                 groupId = "com.androidai.framework.theme"
                 artifactId = "sandroid-ui"
                 version = "1.0.0"
 
                 afterEvaluate {
-                    from(components["release"])
+                    from(components["kotlinMultiplatform"])
                 }
             }
         }
     }
-}
+}*/
 
 task("testClasses").doLast {
     println("This is a dummy testClasses task")

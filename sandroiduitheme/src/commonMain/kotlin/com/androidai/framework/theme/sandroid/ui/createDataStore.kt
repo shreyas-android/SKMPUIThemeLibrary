@@ -1,11 +1,9 @@
 package com.androidai.framework.theme.sandroid.ui
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import androidx.datastore.preferences.core.Preferences
-import okio.Path.Companion.toPath
 
-fun createDataStore(
+import com.russhwolf.settings.Settings
+
+/*fun createDataStore(
     producePath: () -> String,
 ): DataStore<Preferences> = PreferenceDataStoreFactory.createWithPath(
     corruptionHandler = null,
@@ -13,4 +11,6 @@ fun createDataStore(
     produceFile = { producePath().toPath() },
 )
 
-expect fun getDataStore(context:Any? = null):DataStore<Preferences>
+// expect fun getDataStore(context:Any? = null):DataStore<Preferences>*/
+
+expect fun getSettingsFactory(context: Any? = null): Settings.Factory
