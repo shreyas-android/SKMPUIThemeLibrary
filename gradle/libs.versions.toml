@@ -41,8 +41,8 @@ compose-foundation-foundation = { module = "androidx.compose.foundation:foundati
 compose-ui-uitextfonts = { module = "androidx.compose.ui:ui-text-google-fonts" }
 compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
 
+datastore= { group = "androidx.datastore", name = "datastore", version.ref = "datastoreVersion"}
 datastore_pref = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastoreVersion"}
-datastore_core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastoreVersion"}
 
 
 [plugins]
