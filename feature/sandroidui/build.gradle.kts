@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("maven-publish")
 }
 
 android {
@@ -38,6 +39,22 @@ android {
     }
 }
 
+afterEvaluate {
+    publishing{
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "com.androidai.framework.feature"
+                artifactId = "sandroid-ui"
+                version = "1.0.0"
+
+                afterEvaluate {
+                    from(components["release"])
+                }
+            }
+        }
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -51,5 +68,5 @@ dependencies {
     implementation(libs.compose.foundation.foundation)
     implementation(libs.compose.viewmodel)
     implementation(libs.compose.material3)
-    api(project(":sandroiduitheme"))
+    implementation(project(":sandroiduitheme"))
 }
