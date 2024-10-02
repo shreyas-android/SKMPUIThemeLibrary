@@ -12,7 +12,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/sandroidui" />
-            <option value="$PROJECT_DIR$/sandroiduitheme" />
+            <option value="$PROJECT_DIR$/theme" />
+            <option value="$PROJECT_DIR$/theme/sandroidui" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
