@@ -45,7 +45,7 @@ android {
     }
 }
 
-group = "com.androidai.framework"
+group = "com.androidai.framework.feature"
 version = "1.0"
 
 afterEvaluate {
@@ -83,5 +83,5 @@ dependencies {
     implementation(libs.compose.foundation.foundation)
     implementation(libs.compose.viewmodel)
     implementation(libs.compose.material3)
-    implementation(project(":sandroiduitheme"))
+    implementation(project(":theme:sandroidui"))
 }

@@ -8,7 +8,7 @@ plugins {
 }
 
 version = "1.0.0"
-group = "com.androidai.framework.theme.sandroid.ui"
+group = "com.androidai.framework.theme"
 
 kotlin {
 
@@ -28,7 +28,7 @@ kotlin {
 
         ).forEach {
         it.binaries.framework {
-            baseName = "SAndroidUITheme"
+            baseName = "SAndroidUI"
         }
     }
 
@@ -100,21 +100,21 @@ android {
 }
 
 
-/*afterEvaluate {
+afterEvaluate {
     publishing{
         publications {
-            create<MavenPublication>("kotlinMultiplatform") {
+            create<MavenPublication>("release") {
                 groupId = "com.androidai.framework.theme"
-                artifactId = "sandroid-ui"
+                artifactId = "sandroidui"
                 version = "1.0.0"
 
                 afterEvaluate {
-                    from(components["kotlinMultiplatform"])
+                    from(components["release"])
                 }
             }
         }
     }
-}*/
+}
 
 task("testClasses").doLast {
     println("This is a dummy testClasses task")

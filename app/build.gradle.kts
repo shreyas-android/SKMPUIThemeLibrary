@@ -59,5 +59,5 @@ dependencies {
     implementation(libs.compose.material3)
 
     implementation(project(":feature:sandroidui"))
-    implementation(project(":sandroiduitheme"))
+    implementation(project(":theme:sandroidui"))
 }

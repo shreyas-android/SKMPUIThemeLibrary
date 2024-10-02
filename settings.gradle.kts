@@ -11,10 +11,11 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url = uri("https://maven.google.com") }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
 rootProject.name = "SAndroidUITheme"
 include(":app")
-include(":sandroiduitheme")
 include(":feature:sandroidui")
+include(":theme:sandroidui")

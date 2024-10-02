@@ -15,8 +15,7 @@ object SAndroidThemeCore {
 
     fun init(
             context : Context,
-            defaultThemeInfo : DefaultThemeInfo = DefaultThemeInfo.getDefault()) {
-        // val datastore = getDataStore(context)
+            defaultThemeInfo : DefaultThemeInfo) {
         val settings = getSettingsFactory(context).create("theme_settings")
         isNightMode = {
             context.resources.configuration.uiMode.and(

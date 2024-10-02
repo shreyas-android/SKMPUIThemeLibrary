@@ -1,8 +1,6 @@
 package com.androidai.framework.theme.sandroid.ui
 
 import android.content.Context
-import android.preference.PreferenceManager
-
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.SharedPreferencesSettings
 
@@ -21,16 +19,14 @@ actual fun getSettingsFactory(context: Any?): Settings.Factory {
         throw IllegalStateException("You must provide context for Android")
     }
     else {
-        requireNotNull(context)
+        /* val masterKey = MasterKey.Builder(context).setKeyScheme(KeyScheme.AES256_GCM).build()
 
-       /* val masterKey = MasterKey.Builder(context).setKeyScheme(KeyScheme.AES256_GCM).build()
+         val encryptedPreferences = EncryptedSharedPreferences.create(
+             context, context.packageName + "_encrypted_preferences", masterKey,
+             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
 
-        val encryptedPreferences = EncryptedSharedPreferences.create(
-            context, context.packageName + "_encrypted_preferences", masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
-
-        return SharedPreferencesSettings(encryptedPreferences)*/
+         return SharedPreferencesSettings(encryptedPreferences)*/
        return SharedPreferencesSettings.Factory(context)
     }
 }

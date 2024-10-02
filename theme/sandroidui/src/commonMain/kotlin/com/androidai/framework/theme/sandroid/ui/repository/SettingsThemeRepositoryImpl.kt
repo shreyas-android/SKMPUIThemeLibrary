@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 internal class SettingsThemeRepositoryImpl(
-        private val defaultThemeInfo : DefaultThemeInfo = DefaultThemeInfo.getDefault(),
+        private val defaultThemeInfo : DefaultThemeInfo,
         private val settings : Settings) : ThemeRepository {
 
     private companion object {
