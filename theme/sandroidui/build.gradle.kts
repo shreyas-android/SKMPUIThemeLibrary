@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    kotlin("native.cocoapods")
+//    kotlin("native.cocoapods")
     id("maven-publish")
 }
 
@@ -15,7 +15,7 @@ kotlin {
     android {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "1.8"
             }
         }
     }
@@ -103,7 +103,7 @@ android {
 afterEvaluate {
     publishing{
         publications {
-            create<MavenPublication>("release") {
+          /*  create<MavenPublication>("release") {
                 groupId = "com.androidai.framework.theme"
                 artifactId = "sandroidui"
                 version = "1.0.0"
@@ -111,11 +111,7 @@ afterEvaluate {
                 afterEvaluate {
                     from(components["release"])
                 }
-            }
+            }*/
         }
     }
-}
-
-task("testClasses").doLast {
-    println("This is a dummy testClasses task")
 }

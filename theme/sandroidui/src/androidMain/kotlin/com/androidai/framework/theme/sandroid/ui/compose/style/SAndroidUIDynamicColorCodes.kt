@@ -7,7 +7,7 @@ import com.google.android.material.elevation.SurfaceColors
 
 class SAndroidUIDynamicColorCodes(val context:Context) {
 
-    val tonalPalette = SAndroidUIDynamicTonalPalette(context)
+    val tonalPalette = SAndroidUITonalPalette(context)
 
     val ColorBackground = Color.White
     val ColorBackgroundNight =Color.Black

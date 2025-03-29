@@ -2,7 +2,6 @@ package com.androidai.framework.theme.sandroid.ui.theme.colors.dynamic.light
 
 import android.content.Context
 import com.androidai.framework.theme.sandroid.ui.compose.style.SAndroidUIDynamicColorCodes
-import com.androidai.framework.theme.sandroid.ui.compose.style.SAndroidUIDynamicTonalPalette
 import com.androidai.framework.theme.sandroid.ui.data.SAndroidUIOtherColors
 
 internal fun getDynamicLightSAndroidUIOtherColors(context : Context) : SAndroidUIOtherColors {

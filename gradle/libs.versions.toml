@@ -1,6 +1,6 @@
 [versions]
-agp = "7.4.2"
-kotlin = "1.8.0"
+agp = "8.3.2"
+kotlin = "1.8.21"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -10,7 +10,7 @@ material = "1.12.0"
 
 atomicfuVersion = "0.17.3"
 
-composeCompiler = "1.4.0"
+composeCompiler = "1.4.7"
 composeVersion = "1.4.0"
 composeViewmodel = "2.4.1"
 composeFoundation = "1.4.0"
