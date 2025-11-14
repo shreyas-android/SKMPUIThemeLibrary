@@ -39,8 +39,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -62,8 +64,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.androidai.framework.theme.sandroid.ui.SAndroidUITheme
-import com.androidai.framework.theme.sandroid.ui.Mode
+import com.androidai.framework.theme.sandroid.ui.theme.SAndroidUITheme
+import com.androidai.framework.theme.sandroid.ui.data.model.enum.Mode
 import com.androidai.framework.theme.sandroid.ui.compose.style.SAndroidUIColorCodes
 import com.androidai.framework.theme.sandroid.ui.thememanager.SAndroidUIThemeManager
 import com.google.android.material.color.DynamicColors
@@ -441,10 +443,9 @@ fun SettingsSwitch(
 fun Modifier.rippleClickable(
         enabled : Boolean = true, shouldClearFocus : Boolean = true, onClick : () -> Unit) =
     composed {
-        val rippleTheme = LocalRippleTheme.current
         val focusManager = LocalFocusManager.current
         this.clickable(enabled = enabled,
-            indication = rememberRipple(color = rippleTheme.defaultColor()),
+            indication = ripple(color = SAndroidUITheme.colors.sAndroidUIOtherColors.rippleColor),
             interactionSource = remember { MutableInteractionSource() }, onClick = {
                 if(shouldClearFocus) {
                     focusManager.clearFocus()

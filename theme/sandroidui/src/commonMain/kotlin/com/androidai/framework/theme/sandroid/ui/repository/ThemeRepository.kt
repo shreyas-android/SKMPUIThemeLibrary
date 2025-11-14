@@ -1,8 +1,8 @@
 package com.androidai.framework.theme.sandroid.ui.repository
 
-import com.androidai.framework.theme.sandroid.ui.Mode
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.androidai.framework.theme.sandroid.ui.data.model.DefaultThemeInfo
-import com.russhwolf.settings.Settings
 import kotlinx.coroutines.flow.Flow
 
 interface ThemeRepository {
@@ -12,7 +12,7 @@ interface ThemeRepository {
             return ThemeRepositoryImpl(defaultThemeInfo, dataStore)
         }*/
 
-        fun getInstance(defaultThemeInfo : DefaultThemeInfo, settings : Settings) : ThemeRepository {
+        fun getInstance(defaultThemeInfo: DefaultThemeInfo, settings: DataStore<Preferences>) : ThemeRepository {
             return SettingsThemeRepositoryImpl(defaultThemeInfo, settings)
         }
     }

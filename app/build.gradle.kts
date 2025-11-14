@@ -1,16 +1,19 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.compose.compiler)
+    id("kotlin-parcelize")
+    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
     namespace = "com.android.ai.theme.avandroidui"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.android.ai.theme.avandroidui"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -51,12 +54,12 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.compose.activity)
-    implementation(libs.compose.constraintlayout)
-    implementation(libs.compose.material)
-    implementation(libs.compose.foundation.foundation)
-    implementation(libs.compose.viewmodel)
-    implementation(libs.compose.material3)
+    implementation(libs.scompose.activity)
+    implementation(libs.scompose.constraintlayout)
+    implementation(libs.scompose.material)
+    implementation(libs.scompose.foundation.foundation)
+    implementation(libs.scompose.viewmodel)
+    implementation(libs.scompose.material3)
 
     implementation(project(":feature:sandroidui"))
     implementation(project(":theme:sandroidui"))

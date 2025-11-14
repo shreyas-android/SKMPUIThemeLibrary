@@ -1,6 +1,6 @@
 package com.androidai.framework.theme.sandroid.ui.ext
 
-import com.androidai.framework.theme.sandroid.ui.Mode
+import com.androidai.framework.theme.sandroid.ui.data.model.enum.Mode
 
 fun Int.toMode() : Mode {
    return when(this){

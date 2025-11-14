@@ -1,12 +1,17 @@
 [versions]
-agp = "8.3.2"
-kotlin = "1.8.21"
+
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.5.0"
 material = "1.12.0"
+
+agp = "8.9.3"
+kotlin = "2.1.21"
+compose = "1.9.4"
+cmp-compose= "1.7.0"
+compose-material3 = "1.4.0"
 
 atomicfuVersion = "0.17.3"
 
@@ -15,11 +20,13 @@ composeVersion = "1.4.0"
 composeViewmodel = "2.4.1"
 composeFoundation = "1.4.0"
 composeMaterial = "1.4.0"
-composeMaterial3 = "1.0.1"
+scomposeMaterial3 = "1.0.1"
 composeConstraintLayout = "1.0.1"
 composeActivity = "1.8.0"
 datastoreVersion = "1.1.0"
 securityCryptoKtx = "1.0.0"
+
+compose-multiplatform = "1.8.2"
 
 
 [libraries]
@@ -31,24 +38,33 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "atomicfuVersion" }
 
-compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity" }
-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "composeMaterial3" }
-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeMaterial" }
-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "composeFoundation" }
-compose-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "composeConstraintLayout" }
-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "composeViewmodel" }
-compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "composeFoundation" }
-compose-foundation-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "composeFoundation" }
-compose-ui-uitextfonts = { module = "androidx.compose.ui:ui-text-google-fonts" }
-compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
+scompose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity" }
+scompose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "scomposeMaterial3" }
+scompose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeMaterial" }
+scompose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "composeFoundation" }
+scompose-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "composeConstraintLayout" }
+scompose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "composeViewmodel" }
+scompose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "composeFoundation" }
+scompose-foundation-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "composeFoundation" }
+scompose-ui-uitextfonts = { module = "androidx.compose.ui:ui-text-google-fonts" }
+scompose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
 
 datastore= { group = "androidx.datastore", name = "datastore", version.ref = "datastoreVersion"}
 datastore_pref = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastoreVersion"}
 androidx-security-crypto-ktx = { group = "androidx.security", name = "security-crypto-ktx", version.ref = "securityCryptoKtx" }
 
+cmp-compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "cmp-compose" }
+cmp-compose-foundation = { group = "org.jetbrains.compose.foundation", name = "foundation", version.ref = "cmp-compose" }
+cmp-compose-material3 = { group = "org.jetbrains.compose.material3", name = "material3", version.ref = "cmp-compose" }
+cmp-compose-ui = { group = "org.jetbrains.compose.ui", name = "ui", version.ref = "cmp-compose" }
+
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-android-library = { id = "com.android.library", version.ref = "agp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 
