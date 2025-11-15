@@ -120,21 +120,18 @@ android {
 }
 
 
-afterEvaluate {
-    publishing{
-        publications {
-          /*  create<MavenPublication>("release") {
-                groupId = "com.androidai.framework.theme"
-                artifactId = "sandroidui"
-                version = "1.0.0"
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            groupId = "com.androidai.framework.theme"
+            artifactId = "sandroidui"
+            version = "1.0.0"
 
-                afterEvaluate {
-                    from(components["release"])
-                }
-            }*/
+            from(components["kotlin"])
         }
     }
 }
+
 
 compose.resources {
     publicResClass = true
