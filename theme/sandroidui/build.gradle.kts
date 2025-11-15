@@ -2,10 +2,8 @@
 
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
-
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     id("kotlin-parcelize")
@@ -14,36 +12,35 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     id("maven-publish")
     id("signing")
-
-
-
 }
 
-kotlin {
+version = "1.0.0"
+group = "com.androidai.framework.theme"
 
+kotlin {
     jvm()
+
     wasmJs {
         browser()
         nodejs()
         binaries.executable()
     }
+
     androidTarget {
         publishLibraryVariants("release")
 
         compilations.all {
             compileTaskProvider.configure {
-                compilerOptions {
-                    jvmTarget.set(JvmTarget.JVM_1_8)
-                }
+                compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
             }
         }
     }
+
     listOf(
         iosX64(),
         iosArm64(),
-        iosSimulatorArm64(),
-
-        ).forEach {
+        iosSimulatorArm64()
+    ).forEach {
         it.binaries.framework {
             baseName = "SAndroidUI"
         }
@@ -52,8 +49,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-
-
                 implementation(libs.cmp.compose.ui)
                 implementation(libs.cmp.compose.runtime)
                 implementation(libs.cmp.compose.material3)
@@ -64,45 +59,25 @@ kotlin {
                 implementation("org.jetbrains.compose.components:components-resources:1.9.3")
             }
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
     }
 }
 
 android {
     namespace = "com.androidai.framework.theme.sandroid.ui"
     compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-    }
 
-    buildFeatures {
-        compose = true
-    }
+    defaultConfig { minSdk = 24 }
+
+    buildFeatures { compose = true }
 
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
-
 }
 
-/*publishing {
-    publications.withType<MavenPublication>().configureEach {
-        artifactId = "sandroidui"
-        pom {
-            name.set("SKMPUIThemeLibrary")
-            description.set("Compose Multiplatform UI Theme Library")
-            url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
-            licenses {
-                license { name.set("Apache-2.0") }
-            }
-        }
-    }
-}*/
-
+/**
+ * NEW CENTRAL PORTAL — POM + PUBLICATIONS
+ */
 publishing {
     publications.withType<MavenPublication>().configureEach {
         artifactId = "sandroidui"
@@ -134,34 +109,24 @@ publishing {
             }
         }
     }
-
-    repositories {
-        maven {
-            name = "central"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = project.findProperty("ossrhUsername") as String?
-                password = project.findProperty("ossrhPassword") as String?
-            }
-        }
-    }
 }
 
+/**
+ * SIGNING — Works with GitHub Actions in-memory key
+ */
 signing {
     useInMemoryPgpKeys(
-        project.findProperty("SIGNING_KEY") as String?,
-        project.findProperty("SIGNING_PASSWORD") as String?
+        System.getenv("SIGNING_KEY"),
+        System.getenv("SIGNING_PASSWORD")
     )
     sign(publishing.publications)
 }
 
-
-
+/**
+ * Compose resources
+ */
 compose.resources {
     publicResClass = true
     packageOfResClass = "com.androidai.framework.theme.sandroid"
     generateResClass = always
 }
-
-
-
