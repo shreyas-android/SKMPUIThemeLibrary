@@ -7,17 +7,17 @@ install:
   - sudo apt-get install -y nodejs
   - npm install --global yarn
 
-  # Show versions
   - node -v
   - npm -v
   - yarn -v
 
-  # Run each publication task SEPARATELY (IMPORTANT)
+  # Always publish these (they exist on Linux)
   - ./gradlew --no-daemon --stacktrace publishKotlinMultiplatformPublicationToMavenLocal
   - ./gradlew --no-daemon --stacktrace publishJvmPublicationToMavenLocal
   - ./gradlew --no-daemon --stacktrace publishWasmJsPublicationToMavenLocal
   - ./gradlew --no-daemon --stacktrace publishAndroidReleasePublicationToMavenLocal
-  - ./gradlew --no-daemon --stacktrace publishIosArm64PublicationToMavenLocal
-  - ./gradlew --no-daemon --stacktrace publishIosX64PublicationToMavenLocal
-  - ./gradlew --no-daemon --stacktrace publishIosSimulatorArm64PublicationToMavenLocal
 
+  # Conditionally publish iOS artifacts (only if tasks exist)
+  - if ./gradlew tasks | grep -q publishIosArm64PublicationToMavenLocal; then ./gradlew publishIosArm64PublicationToMavenLocal; fi
+  - if ./gradlew tasks | grep -q publishIosX64PublicationToMavenLocal; then ./gradlew publishIosX64PublicationToMavenLocal; fi
+  - if ./gradlew tasks | grep -q publishIosSimulatorArm64PublicationToMavenLocal; then ./gradlew publishIosSimulatorArm64PublicationToMavenLocal; fi
