@@ -13,7 +13,7 @@ plugins {
 
 }
 
-version = "1.0.1"
+version = "1.0.2"
 group = "com.androidai.framework.theme"
 
 kotlin {
@@ -119,19 +119,17 @@ android {
 
 }
 
-
 publishing {
     publications {
         create<MavenPublication>("release") {
             groupId = "com.androidai.framework.theme"
             artifactId = "sandroidui"
-            version = "1.0.0"
+            version = "1.0.2"
 
             from(components["kotlin"])
         }
     }
 }
-
 
 compose.resources {
     publicResClass = true
