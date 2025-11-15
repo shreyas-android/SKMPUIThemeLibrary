@@ -13,6 +13,9 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.multiplatform)
     id("maven-publish")
+    id("signing")
+
+
 
 }
 
@@ -25,6 +28,7 @@ kotlin {
         binaries.executable()
     }
     androidTarget {
+        publishLibraryVariants("release")
 
         compilations.all {
             compileTaskProvider.configure {
@@ -82,9 +86,10 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
+
 }
 
-publishing {
+/*publishing {
     publications.withType<MavenPublication>().configureEach {
         artifactId = "sandroidui"
         pom {
@@ -96,7 +101,61 @@ publishing {
             }
         }
     }
+}*/
+
+publishing {
+    publications.withType<MavenPublication>().configureEach {
+        artifactId = "sandroidui"
+
+        pom {
+            name.set("SAndroidUITheme")
+            description.set("Compose Multiplatform Theme Library")
+            url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
+
+            licenses {
+                license {
+                    name.set("Apache-2.0")
+                    url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                }
+            }
+
+            scm {
+                connection.set("scm:git:git://github.com/shreyas-android/SKMPUIThemeLibrary.git")
+                developerConnection.set("scm:git:ssh://github.com/shreyas-android/SKMPUIThemeLibrary.git")
+                url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
+            }
+
+            developers {
+                developer {
+                    id.set("shreyas")
+                    name.set("Shreyas Android")
+                    email.set("avengers14.blogger@gmail.com")
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "central"
+            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = project.findProperty("ossrhUsername") as String?
+                password = project.findProperty("ossrhPassword") as String?
+            }
+        }
+    }
 }
+
+signing {
+    useInMemoryPgpKeys(
+        project.findProperty("SIGNING_KEY") as String?,
+        project.findProperty("SIGNING_PASSWORD") as String?
+    )
+    sign(publishing.publications)
+}
+
+
 
 compose.resources {
     publicResClass = true
