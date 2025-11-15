@@ -1,0 +1,18 @@
+jdk:
+  - openjdk17
+
+install:
+  # Install Node.js 18 LTS (required for wasmJs + browser)
+  - curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+  - sudo apt-get install -y nodejs
+
+  # Install Yarn (required for kotlinNpmInstall)
+  - npm install --global yarn
+
+  # Print versions
+  - node -v
+  - npm -v
+  - yarn -v
+
+  # Now run full publication
+  - ./gradlew --no-daemon --stacktrace publish
