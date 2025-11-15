@@ -5,14 +5,14 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
-    id("maven-publish")
+
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     id("kotlin-parcelize")
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.multiplatform)
-
+    id("maven-publish")
 
 }
 
@@ -22,7 +22,11 @@ group = "com.androidai.framework.theme"
 kotlin {
 
     jvm()
-    wasmJs()
+    wasmJs {
+        browser()
+        nodejs()
+        binaries.executable()
+    }
     androidTarget {
         publishLibraryVariants("release")
 
@@ -86,18 +90,6 @@ android {
     publishing {
         singleVariant("release") {
             withSourcesJar()
-        }
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            groupId = "com.androidai.framework.theme"
-            artifactId = "sandroidui"
-            version = "1.0.2"
-
-            from(components["kotlin"])
         }
     }
 }

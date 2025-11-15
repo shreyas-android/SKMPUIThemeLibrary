@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.compose.compiler)
     id("kotlin-parcelize")
-    id("maven-publish")
+//    id("maven-publish")
 }
 
 android {
@@ -50,6 +50,7 @@ android {
 group = "com.androidai.framework.feature"
 version = "1.0"
 
+/*
 afterEvaluate {
     publishing{
         publications {
@@ -65,6 +66,7 @@ afterEvaluate {
         }
     }
 }
+*/
 
 dependencies {
 
