@@ -40,11 +40,11 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
-    publishing {
+    /*publishing {
         singleVariant("release") {
             withSourcesJar()
         }
-    }
+    }*/
 }
 
 group = "com.androidai.framework.feature"
