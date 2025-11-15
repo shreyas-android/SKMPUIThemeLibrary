@@ -24,6 +24,8 @@ kotlin {
     jvm()
     wasmJs()
     androidTarget {
+        publishLibraryVariants("release")
+
         compilations.all {
             compileTaskProvider.configure {
                 compilerOptions {
@@ -81,6 +83,11 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 publishing {
@@ -91,6 +98,22 @@ publishing {
             version = "1.0.2"
 
             from(components["kotlin"])
+        }
+    }
+}
+
+publishing {
+    publications.withType<MavenPublication>().configureEach {
+        pom {
+            name.set("SThemeLibrary")
+            description.set("CMP theme library for Android, iOS, Desktop, WASM")
+            url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary.git")
+
+            licenses {
+                license {
+                    name.set("Apache-2.0")
+                }
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ import com.androidai.framework.theme.sandroid.ui.ext.toMode
 import com.androidai.framework.theme.sandroid.ui.repository.ThemeRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -22,7 +22,7 @@ class SAndroidUIThemeManagerImpl(
         private val themeRepository : ThemeRepository,
         private val sAndroidUIDefaults : SAndroidUIDefaults, private val isNightMode : () -> Boolean) : SAndroidUIThemeManager {
 
-    private val scope = CoroutineScope(Dispatchers.IO)
+    private val scope = CoroutineScope(Dispatchers.Default+ SupervisorJob())
 
     private val sAndroidUIColors = MutableStateFlow(DefaultLightSAndroidUIColors)
 
