@@ -16,9 +16,6 @@ plugins {
 
 }
 
-version = "1.0.2"
-group = "com.androidai.framework.theme"
-
 kotlin {
 
     jvm()
@@ -28,7 +25,6 @@ kotlin {
         binaries.executable()
     }
     androidTarget {
-        publishLibraryVariants("release")
 
         compilations.all {
             compileTaskProvider.configure {
@@ -86,25 +82,17 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
 }
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
+        artifactId = "sandroidui"
         pom {
-            name.set("SThemeLibrary")
-            description.set("CMP theme library for Android, iOS, Desktop, WASM")
-            url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary.git")
-
+            name.set("SKMPUIThemeLibrary")
+            description.set("Compose Multiplatform UI Theme Library")
+            url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
             licenses {
-                license {
-                    name.set("Apache-2.0")
-                }
+                license { name.set("Apache-2.0") }
             }
         }
     }
