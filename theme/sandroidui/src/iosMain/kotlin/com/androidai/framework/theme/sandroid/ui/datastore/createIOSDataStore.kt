@@ -5,7 +5,7 @@ import platform.Foundation.NSUserDomainMask
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSURL
 
-@OptIn(ExperimentalForeignApi::class)
+/*@OptIn(ExperimentalForeignApi::class)
 fun createIOSDataStore() = createDataStore(
   producePath = {
     val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
@@ -17,4 +17,4 @@ fun createIOSDataStore() = createDataStore(
     )
     requireNotNull(documentDirectory).path + "/$dataStoreFileName"
   }
-)
+)*/

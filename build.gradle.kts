@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.compose.compiler).apply(false)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.compose.multiplatform) apply false
+    id("maven-publish")
 }
 
 allprojects {
