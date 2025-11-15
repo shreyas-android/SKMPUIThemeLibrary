@@ -2,17 +2,22 @@ jdk:
   - openjdk17
 
 install:
-  # Install Node + Yarn for WASM
+  # Install Node.js for wasmJs + browser
   - curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
   - sudo apt-get install -y nodejs
   - npm install --global yarn
 
-  # Force ALL multiplatform publications
-  - ./gradlew --no-daemon --stacktrace \
-    publishKotlinMultiplatformPublicationToMavenLocal \
-    publishJvmPublicationToMavenLocal \
-    publishWasmJsPublicationToMavenLocal \
-    publishAndroidReleasePublicationToMavenLocal \
-    publishIosArm64PublicationToMavenLocal \
-    publishIosX64PublicationToMavenLocal \
-    publishIosSimulatorArm64PublicationToMavenLocal
+  # Show versions
+  - node -v
+  - npm -v
+  - yarn -v
+
+  # Run each publication task SEPARATELY (IMPORTANT)
+  - ./gradlew --no-daemon --stacktrace publishKotlinMultiplatformPublicationToMavenLocal
+  - ./gradlew --no-daemon --stacktrace publishJvmPublicationToMavenLocal
+  - ./gradlew --no-daemon --stacktrace publishWasmJsPublicationToMavenLocal
+  - ./gradlew --no-daemon --stacktrace publishAndroidReleasePublicationToMavenLocal
+  - ./gradlew --no-daemon --stacktrace publishIosArm64PublicationToMavenLocal
+  - ./gradlew --no-daemon --stacktrace publishIosX64PublicationToMavenLocal
+  - ./gradlew --no-daemon --stacktrace publishIosSimulatorArm64PublicationToMavenLocal
+
