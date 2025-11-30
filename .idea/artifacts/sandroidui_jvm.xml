@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="sandroidui-jvm">
+    <output-path>$PROJECT_DIR$/theme/sandroidui/build/libs</output-path>
+    <root id="archive" name="sandroidui-jvm.jar">
+      <element id="module-output" name="SAndroidUITheme.theme.sandroidui.jvmMain" />
+    </root>
+  </artifact>
+</component>

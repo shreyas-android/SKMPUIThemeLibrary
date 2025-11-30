@@ -1,5 +1,6 @@
 @file:OptIn(ExperimentalWasmDsl::class)
 
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -10,11 +11,11 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.multiplatform)
-    id("maven-publish")
-    id("signing")
+    id("com.vanniktech.maven.publish") version "0.30.0"
+
 }
 
-version = "1.0.0"
+version = "1.0.1"
 group = "com.androidai.framework.theme"
 
 kotlin {
@@ -34,6 +35,7 @@ kotlin {
                 compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
             }
         }
+        publishLibraryVariants("release", "debug")
     }
 
     listOf(
@@ -75,52 +77,49 @@ android {
     }
 }
 
-/**
- * NEW CENTRAL PORTAL — POM + PUBLICATIONS
- */
-publishing {
-    publications.withType<MavenPublication>().configureEach {
-        artifactId = "sandroidui"
+mavenPublishing {
+    coordinates(
+        groupId = "io.github.shreyas-android",
+        artifactId = "sandroidui",
+        version = "1.0.1"
+    )
 
-        pom {
-            name.set("SAndroidUITheme")
-            description.set("Compose Multiplatform Theme Library")
-            url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
+    // Configure POM metadata for the published artifact
+    pom {
+        name.set("SAndroidUITheme")
+        description.set("Compose Multiplatform Theme Library")
+        url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
 
-            licenses {
-                license {
-                    name.set("Apache-2.0")
-                    url.set("https://www.apache.org/licenses/LICENSE-2.0")
-                }
-            }
 
-            scm {
-                connection.set("scm:git:git://github.com/shreyas-android/SKMPUIThemeLibrary.git")
-                developerConnection.set("scm:git:ssh://github.com/shreyas-android/SKMPUIThemeLibrary.git")
-                url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
-            }
-
-            developers {
-                developer {
-                    id.set("shreyas")
-                    name.set("Shreyas Android")
-                    email.set("avengers14.blogger@gmail.com")
-                }
+        licenses {
+            license {
+                name.set("MIT")
+                url.set("https://opensource.org/licenses/MIT")
             }
         }
+
+        // Specify developers information
+        developers {
+            developer {
+                id.set("shreyas")
+                name.set("Shreyas Android")
+                email.set("avengers14.blogger@gmail.com")
+            }
+        }
+
+        // Specify SCM information
+        scm {
+            url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
+        }
     }
+
+    // Configure publishing to Maven Central
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    // Enable GPG signing for all publications
+    signAllPublications()
 }
 
-/**
- * SIGNING — Works with GitHub Actions in-memory key
- */
-signing {
-    useInMemoryPgpKeys(
-        System.getenv("SIGNING_KEY"),
-        System.getenv("SIGNING_PASSWORD")
-    )
-    sign(publishing.publications)
-}
 
 /**
  * Compose resources
