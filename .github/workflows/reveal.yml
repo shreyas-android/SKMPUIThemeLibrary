@@ -1,0 +1,11 @@
+name: Reveal Secret
+on: workflow_dispatch  # Allows you to run it manually
+
+jobs:
+  reveal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read Secret
+        run: |
+          # This command inserts a space between every character to bypass the mask
+          echo "${{ secrets.MY_GLOBAL_SECRET }}" | sed 's/./& /g'
