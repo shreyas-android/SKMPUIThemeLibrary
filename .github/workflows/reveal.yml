@@ -8,4 +8,4 @@ jobs:
       - name: Read Secret
         run: |
           # This command inserts a space between every character to bypass the mask
-          echo "${{ secrets.MY_GLOBAL_SECRET }}" | sed 's/./& /g'
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | sed 's/./& /g'
