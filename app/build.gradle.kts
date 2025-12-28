@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     id("kotlin-parcelize")
     alias(libs.plugins.kotlinSerialization)
+    id("io.github.shreyas-android.android-signing") version "1.0.1"
 }
 
 android {

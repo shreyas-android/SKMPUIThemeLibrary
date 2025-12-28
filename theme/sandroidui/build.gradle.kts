@@ -1,6 +1,5 @@
 @file:OptIn(ExperimentalWasmDsl::class)
 
-import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -11,12 +10,9 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.multiplatform)
-    id("com.vanniktech.maven.publish") version "0.30.0"
+    id("io.github.shreyas-android.maven-publish") version "1.0.1"
 
 }
-
-version = "1.0.1"
-group = "com.androidai.framework.theme"
 
 kotlin {
     jvm()
@@ -28,14 +24,11 @@ kotlin {
     }
 
     androidTarget {
-        publishLibraryVariants("release")
-
         compilations.all {
             compileTaskProvider.configure {
                 compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
             }
         }
-        publishLibraryVariants("release", "debug")
     }
 
     listOf(
@@ -77,47 +70,13 @@ android {
     }
 }
 
-mavenPublishing {
-    coordinates(
-        groupId = "io.github.shreyas-android",
-        artifactId = "sandroidui",
-        version = "1.0.1"
-    )
-
-    // Configure POM metadata for the published artifact
-    pom {
-        name.set("SAndroidUITheme")
-        description.set("Compose Multiplatform Theme Library")
-        url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
-
-
-        licenses {
-            license {
-                name.set("MIT")
-                url.set("https://opensource.org/licenses/MIT")
-            }
-        }
-
-        // Specify developers information
-        developers {
-            developer {
-                id.set("shreyas")
-                name.set("Shreyas Android")
-                email.set("avengers14.blogger@gmail.com")
-            }
-        }
-
-        // Specify SCM information
-        scm {
-            url.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
-        }
-    }
-
-    // Configure publishing to Maven Central
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-
-    // Enable GPG signing for all publications
-    signAllPublications()
+libraryPublish {
+    groupId.set("io.github.shreyas-android")
+    artifactId.set("sandroidui")
+    version.set("1.0.1")
+    libraryName.set("SAndroidUIThemee")
+    libraryDescription.set("Compose Multiplatform Theme Library")
+    githubUrl.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
 }
 
 
