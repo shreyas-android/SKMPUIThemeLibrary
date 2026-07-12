@@ -25,6 +25,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -209,28 +210,37 @@ private fun AppearanceTopAppBar(
             2.dp
         }
     Surface(elevation = topAppBarElevation) {
-        TopAppBar(elevation = 0.dp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(topAppBarColor)
-                .statusBarsPadding(),
-            backgroundColor = topAppBarColor, title = {
-                Text(
-                    text = title,
-                    style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Medium),
-                    color = SAndroidUITheme.colors.sAndroidUITextColors.topAppBarTextColor)
-            }, navigationIcon = if(canShowBackButton) {
-                {
-                    IconButton(modifier = Modifier, onClick = { onBackButtonClicked() }) {
-                        Icon(
-                            Icons.Filled.ArrowBack, contentDescription = "Back button",
-                            tint = SAndroidUITheme.colors.sAndroidUIIconColors.iconColor)
+        Column {
+            TopAppBar(elevation = 0.dp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(topAppBarColor)
+                    .statusBarsPadding(),
+                backgroundColor = topAppBarColor, title = {
+                    Text(
+                        text = title,
+                        style = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Medium),
+                        color = SAndroidUITheme.colors.sAndroidUITextColors.topAppBarTextColor)
+                }, navigationIcon = if(canShowBackButton) {
+                    {
+                        IconButton(modifier = Modifier, onClick = { onBackButtonClicked() }) {
+                            Icon(
+                                Icons.Filled.ArrowBack, contentDescription = "Back button",
+                                tint = SAndroidUITheme.colors.sAndroidUIIconColors.iconColor)
+                        }
                     }
-                }
-            } else {
-                null
-            })
+                } else {
+                    null
+                })
 
+            // When the app bar shares the background color (e.g. white mode) it has no
+            // elevation shadow, so draw a divider to keep it separated from the content.
+            if(topAppBarElevation == 0.dp) {
+                Divider(
+                    color = SAndroidUITheme.colors.sAndroidUIOtherColors.dividerColor,
+                    thickness = 1.dp)
+            }
+        }
     }
 
 }

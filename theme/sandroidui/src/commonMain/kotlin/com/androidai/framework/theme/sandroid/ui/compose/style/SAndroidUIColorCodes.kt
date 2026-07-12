@@ -7,7 +7,7 @@ object SAndroidUIColorCodes {
     val ColorActionViolet = Color(0xFF5170FF)
     val ColorActionPink = Color(0xFFFF66C4)
 
-    val ColorBackground = Color(0xFFF1F1F4)
+    val ColorBackground = Color(0xFFFFFFFF)
     val ColorBackgroundNight = Color(0xFF000000)
 
     val ColorBackgroundSecondary = Color(0xFFE6E6E6)
@@ -22,7 +22,7 @@ object SAndroidUIColorCodes {
     val ColorAppBar = Color(0xFFFFFFFF)
     val ColorAppBarNight = Color(0xFF1C1C1E)
 
-    val ColorSheetBackground = Color(0xFFFFFFFF)
+    val ColorSheetBackground = Color(0xFFF1F1F4)
     val ColorSheetBackgroundNight = Color(0xFF1A1A1A)
 
     val ColorSheetSearchBackground = Color(0xFFF1F1F4)
@@ -47,13 +47,13 @@ object SAndroidUIColorCodes {
 
     val ColorSelected = Color(0x1A306CC0)
 
-    val ColorDialogBackground = Color(0xFFFFFFFF)
+    val ColorDialogBackground = Color(0xFFF1F1F4)
     val ColorDialogBackgroundNight = Color(0xFF1A1A1A)
 
-    val ColorCardBackground = Color(0xFFFFFFFF)
+    val ColorCardBackground = Color(0xFFF1F1F4)
     val ColorCardBackgroundNight = Color(0xFF1C1C1E)
 
-    val ColorBottomSheetBackground = Color(0xFFFFFFFF)
+    val ColorBottomSheetBackground = Color(0xFFF1F1F4)
     val ColorBottomSheetBackgroundNight = Color(0xFF1A1A1A)
 
     val ColorRipple = Color(0x80306CC0)
