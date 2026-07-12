@@ -27,19 +27,35 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle-
 
-      # NOTE: The manual GPG key import step was removed because module-build.gradle.kts
-      # uses useInMemoryPgpKeys() and reads the key from the SIGNING_KEY environment variable.
+      # The convention plugin signs with the classic Gradle signing plugin, which needs a
+      # BINARY secret keyring FILE plus the SHORT (8-hex) key id. Both are derived here
+      # from the existing armored SIGNING_KEY secret, so the value stored in the
+      # SIGNING_KEY_ID secret (which was in the wrong format) is not relied upon.
+      - name: Materialize GPG secret keyring and derive key id
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+        run: |
+          export GNUPGHOME="$(mktemp -d)"
+          printf '%s\n' "$SIGNING_KEY" | gpg --batch --import
+          # Binary keyring the classic signing plugin reads via signing.secretKeyRingFile
+          printf '%s\n' "$SIGNING_KEY" | gpg --dearmor > "$GITHUB_WORKSPACE/secring.gpg"
+          # signing.keyId must be the 8-hex short id -> take the last 8 of the long key id
+          LONG_ID="$(gpg --list-secret-keys --with-colons | awk -F: '/^sec:/{print $5; exit}')"
+          echo "Using signing key id: ${LONG_ID: -8}"
+          echo "SIGNING_KEY_ID=${LONG_ID: -8}" >> "$GITHUB_ENV"
 
       - name: Publish to Maven Central
         env:
-          # The maven-publish convention plugin (Vanniktech-based) reads these as Gradle
-          # project properties, so they must be passed via ORG_GRADLE_PROJECT_ env vars.
+          # Central Portal credentials — read by the Vanniktech publish plugin as Gradle
+          # project properties (hence the ORG_GRADLE_PROJECT_ prefix).
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.OSSRH_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.OSSRH_PASSWORD }}
 
-          # In-memory GPG signing key (armored private key) and its passphrase.
-          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+          # Signing — the convention plugin reads these env var names and wires them to the
+          # classic signing plugin. SIGNING_KEY_ID is derived in the previous step (via
+          # $GITHUB_ENV); only password and the keyring path are supplied here.
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_SECRET_KEY_RING_FILE: ${{ github.workspace }}/secring.gpg
 
         # Uploads to a staging repo and releases it to Maven Central in one step.
         run: ./gradlew clean publishAndReleaseToMavenCentral --no-daemon --stacktrace
