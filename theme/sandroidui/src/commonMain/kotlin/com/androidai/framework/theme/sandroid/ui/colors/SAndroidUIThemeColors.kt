@@ -24,7 +24,7 @@ val DefaultLightSAndroidUIColors = SAndroidUIColors(
 
 val DefaultDarkSAndroidUIColors = SAndroidUIColors(
     DarkSAndroidUIBackgroundColors, DarkSAndroidUIIconColors, DarkSAndroidUITextColors,
-    DarkSAndroidUIOtherColors)
+    DarkSAndroidUIOtherColors, isDark = true)
 
 fun getDefaultDynamicLightSAndroidUIColors() = SAndroidUIColors(
     getDynamicLightSAndroidUIBackgroundColors(),
@@ -36,7 +36,7 @@ fun getDefaultDynamicDarkSAndroidUIColors() = SAndroidUIColors(
     getDynamicDarkSAndroidUIBackgroundColors(),
     getDynamicDarkSAndroidUIIconColors(),
     getDynamicDarkSAndroidUITextColors(),
-    getDynamicDarkSAndroidUIOtherColors())
+    getDynamicDarkSAndroidUIOtherColors(), isDark = true)
 
 
 

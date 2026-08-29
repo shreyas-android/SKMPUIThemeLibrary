@@ -19,7 +19,9 @@ import com.androidai.framework.theme.sandroid.ui.thememanager.SAndroidUIThemeMan
 internal fun SAndroidUITheme(
     colors: SAndroidUIColors, content: @Composable () -> Unit
 ) {
-    MaterialTheme(typography = RobotoTypography()) {
+    MaterialTheme(
+        colorScheme = colors.toMaterialColorScheme(),
+        typography = RobotoTypography()) {
         CompositionLocalProvider(
             LocalSAndroidUIColors provides colors,
             LocalRippleConfiguration provides getRippleConfiguration(colors.sAndroidUIOtherColors.rippleColor),

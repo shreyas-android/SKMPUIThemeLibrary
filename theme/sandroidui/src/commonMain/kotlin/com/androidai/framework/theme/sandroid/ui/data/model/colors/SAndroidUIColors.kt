@@ -6,7 +6,8 @@ data class SAndroidUIColors(
         val sAndroidUIBackgroundColors : SAndroidUIBackgroundColors,
         val sAndroidUIIconColors : SAndroidUIIconColors,
         val sAndroidUITextColors : SAndroidUITextColors,
-        val sAndroidUIOtherColors : SAndroidUIOtherColors){
+        val sAndroidUIOtherColors : SAndroidUIOtherColors,
+        val isDark : Boolean = false){
 
     fun getActionColor(color: Color) : SAndroidUIColors {
         return copy(

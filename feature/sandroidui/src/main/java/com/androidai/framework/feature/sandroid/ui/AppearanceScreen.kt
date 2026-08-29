@@ -30,6 +30,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LocalMinimumInteractiveComponentEnforcement
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Scaffold
@@ -107,91 +108,95 @@ fun AppearanceScreen(
         onBackPressed()
     }
 
+    // The Material 2 components below (Scaffold, Surface, Card, TopAppBar, ...) fall back to
+    // Material's default light palette for everything that is not coloured explicitly, so feed
+    // them the active palette to keep both the white/light and the dark theme correct.
+    MaterialTheme(colors = SAndroidUITheme.colors.toMaterialColors()) {
 
-
-    Scaffold(
-        backgroundColor = SAndroidUITheme.colors.sAndroidUIBackgroundColors.backgroundColor,
-        modifier = Modifier,
-        topBar = {
-            AppearanceTopAppBar(title, canShowBackButton) {
-                onBackPressed()
-            }
-        },
-    ) { innerPadding ->
-
-        Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .padding(innerPadding)
-                .padding(vertical = 16.dp)) {
-            NormalCard(SAndroidUITheme.colors.sAndroidUIBackgroundColors.cardBackgroundColor) {
-                Row(modifier = Modifier.padding(horizontal = 8.dp)) {
-                    ThemeItem(modifier = Modifier.weight(1f), themeType = Mode.LIGHT,
-                        isSelected = Mode.LIGHT == selectedMode, onThemeSelected = {
-                            onDayNightModeChanged(it)
-                        })
-
-                    ThemeItem(modifier = Modifier.weight(1f), themeType = Mode.DARK,
-                        isSelected = Mode.DARK == selectedMode, onThemeSelected = {
-                            onDayNightModeChanged(it)
-                        })
-
-
-                    ThemeItem(modifier = Modifier.weight(1f), themeType = Mode.SYSTEM_DEFAULT,
-                        isSelected = Mode.SYSTEM_DEFAULT == selectedMode, onThemeSelected = {
-                            onDayNightModeChanged(it)
-                        })
-
+        Scaffold(
+            backgroundColor = SAndroidUITheme.colors.sAndroidUIBackgroundColors.backgroundColor,
+            modifier = Modifier,
+            topBar = {
+                AppearanceTopAppBar(title, canShowBackButton) {
+                    onBackPressed()
                 }
-            }
+            },
+        ) { innerPadding ->
 
-            Header(headerText = stringResource(R.string.title_action_color))
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .padding(innerPadding)
+                    .padding(vertical = 16.dp)) {
+                NormalCard(SAndroidUITheme.colors.sAndroidUIBackgroundColors.cardBackgroundColor) {
+                    Row(modifier = Modifier.padding(horizontal = 8.dp)) {
+                        ThemeItem(modifier = Modifier.weight(1f), themeType = Mode.LIGHT,
+                            isSelected = Mode.LIGHT == selectedMode, onThemeSelected = {
+                                onDayNightModeChanged(it)
+                            })
 
-            NormalCard(SAndroidUITheme.colors.sAndroidUIBackgroundColors.cardBackgroundColor) {
+                        ThemeItem(modifier = Modifier.weight(1f), themeType = Mode.DARK,
+                            isSelected = Mode.DARK == selectedMode, onThemeSelected = {
+                                onDayNightModeChanged(it)
+                            })
 
-                val itemSize = 36.dp
 
-                val alpha = if(!isDynamicModeEnabled) {
-                    1f
-                } else {
-                    0.5f
+                        ThemeItem(modifier = Modifier.weight(1f), themeType = Mode.SYSTEM_DEFAULT,
+                            isSelected = Mode.SYSTEM_DEFAULT == selectedMode, onThemeSelected = {
+                                onDayNightModeChanged(it)
+                            })
+
+                    }
                 }
 
-                val maxCount = if(actionColorList.size <= 5) {
-                    actionColorList.size
-                } else {
-                    5
-                }
-                EqualSpaceFlowLayout(
-                    Modifier.alpha(alpha), itemSize, maxCount,
-                    actionColorList) { color, _, padding ->
+                Header(headerText = stringResource(R.string.title_action_color))
 
-                    Box(contentAlignment = Alignment.Center,
-                        modifier = Modifier.padding(vertical = 16.dp, horizontal = padding)
-                            .background(
-                                color = color, shape = CircleShape).clip(CircleShape)
-                            .rippleClickable(enabled = !isDynamicModeEnabled) {
-                                onActionColorModeChanged(color)
-                            }.size(itemSize).padding(6.dp)
+                NormalCard(SAndroidUITheme.colors.sAndroidUIBackgroundColors.cardBackgroundColor) {
 
-                    ) {
-                        if(color == selectedActionColor) {
-                            Icon(
-                                modifier = Modifier,
-                                painter = painterResource(id = R.drawable.ic_tick),
-                                contentDescription = "", tint = Color.White)
+                    val itemSize = 36.dp
+
+                    val alpha = if(!isDynamicModeEnabled) {
+                        1f
+                    } else {
+                        0.5f
+                    }
+
+                    val maxCount = if(actionColorList.size <= 5) {
+                        actionColorList.size
+                    } else {
+                        5
+                    }
+                    EqualSpaceFlowLayout(
+                        Modifier.alpha(alpha), itemSize, maxCount,
+                        actionColorList) { color, _, padding ->
+
+                        Box(contentAlignment = Alignment.Center,
+                            modifier = Modifier.padding(vertical = 16.dp, horizontal = padding)
+                                .background(
+                                    color = color, shape = CircleShape).clip(CircleShape)
+                                .rippleClickable(enabled = !isDynamicModeEnabled) {
+                                    onActionColorModeChanged(color)
+                                }.size(itemSize).padding(6.dp)
+
+                        ) {
+                            if(color == selectedActionColor) {
+                                Icon(
+                                    modifier = Modifier,
+                                    painter = painterResource(id = R.drawable.ic_tick),
+                                    contentDescription = "", tint = Color.White)
+                            }
                         }
                     }
                 }
-            }
 
-            if(DynamicColors.isDynamicColorAvailable() && canShowDynamicColor) {
-                NormalCard(SAndroidUITheme.colors.sAndroidUIBackgroundColors.cardBackgroundColor) {
-                    SettingsSwitch(
-                        switchText = stringResource(R.string.title_use_dynamic_theme),
-                        isChecked = isDynamicModeEnabled) {
-                        onDynamicThemeCheckChanged(it)
+                if(DynamicColors.isDynamicColorAvailable() && canShowDynamicColor) {
+                    NormalCard(SAndroidUITheme.colors.sAndroidUIBackgroundColors.cardBackgroundColor) {
+                        SettingsSwitch(
+                            switchText = stringResource(R.string.title_use_dynamic_theme),
+                            isChecked = isDynamicModeEnabled) {
+                            onDynamicThemeCheckChanged(it)
 
+                        }
                     }
                 }
             }

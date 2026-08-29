@@ -3,7 +3,6 @@ package com.androidai.framework.theme.sandroid.ui.thememanager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.androidai.framework.theme.sandroid.ui.data.model.enum.Mode
-import com.androidai.framework.theme.sandroid.ui.colors.DefaultLightSAndroidUIColors
 import com.androidai.framework.theme.sandroid.ui.compose.style.SAndroidUIColorCodes.ColorActionViolet
 import com.androidai.framework.theme.sandroid.ui.data.model.colors.SAndroidUIColors
 import com.androidai.framework.theme.sandroid.ui.default.SAndroidUIDefaults
@@ -24,11 +23,22 @@ class SAndroidUIThemeManagerImpl(
 
     private val scope = CoroutineScope(Dispatchers.Default+ SupervisorJob())
 
-    private val sAndroidUIColors = MutableStateFlow(DefaultLightSAndroidUIColors)
-
     private val actionColorFlow = MutableStateFlow(ColorActionViolet)
     private val modeFlow = MutableStateFlow(Mode.SYSTEM_DEFAULT)
     private val isDynamicThemeEnabledFlow = MutableStateFlow(false)
+
+    /**
+     * Last known light/dark state of the platform. It is kept as a flow instead of being read
+     * from [isNightMode] on demand so the theme can be refreshed when the operating system
+     * switches between light and dark while the app is running.
+     */
+    private val systemNightModeFlow = MutableStateFlow(isNightMode.invoke())
+
+    private val isNightModeFlow = MutableStateFlow(getIsNightMode())
+
+    private val sAndroidUIColors = MutableStateFlow(
+        sAndroidUIDefaults.getSAndroidUIColors(
+            isNightModeFlow.value, isDynamicThemeEnabledFlow.value, actionColorFlow.value))
 
     init {
         collectAllPrefValue()
@@ -94,6 +104,19 @@ class SAndroidUIThemeManagerImpl(
         }
     }
 
+    override fun onSystemNightModeChanged(isSystemInNightMode : Boolean) {
+        if(systemNightModeFlow.value == isSystemInNightMode) {
+            return
+        }
+        systemNightModeFlow.value = isSystemInNightMode
+        updateTheme(
+            actionColorFlow.value, getIsNightMode(), isDynamicThemeEnabledFlow.value)
+    }
+
+    override fun refreshSystemNightMode() {
+        onSystemNightModeChanged(isNightMode.invoke())
+    }
+
     override fun getModeFlow() : StateFlow<Mode> {
         return modeFlow
     }
@@ -106,8 +129,13 @@ class SAndroidUIThemeManagerImpl(
         return isDynamicThemeEnabledFlow
     }
 
+    override fun getIsNightModeFlow() : StateFlow<Boolean> {
+        return isNightModeFlow
+    }
+
     private fun updateTheme(
             actionColor : Color, isNightMode : Boolean, isDynamicThemeEnabled : Boolean) {
+        isNightModeFlow.value = isNightMode
         sAndroidUIColors.update {
             sAndroidUIDefaults.getSAndroidUIColors(isNightMode, isDynamicThemeEnabled, actionColor)
         }
@@ -119,7 +147,7 @@ class SAndroidUIThemeManagerImpl(
                 true
             }
             Mode.SYSTEM_DEFAULT -> {
-                isNightMode.invoke()
+                systemNightModeFlow.value
             }
             else -> {
                 false
