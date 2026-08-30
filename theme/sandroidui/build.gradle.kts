@@ -73,7 +73,7 @@ android {
 libraryPublish {
     groupId.set("io.github.shreyas-android")
     artifactId.set("sandroidui")
-    version.set("1.0.16")
+    version.set("1.0.19")
     libraryName.set("SAndroidUIThemee")
     libraryDescription.set("Compose Multiplatform Theme Library")
     githubUrl.set("https://github.com/shreyas-android/SKMPUIThemeLibrary")
