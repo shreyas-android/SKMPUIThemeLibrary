@@ -44,14 +44,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.cmp.compose.ui)
-                implementation(libs.cmp.compose.runtime)
-                implementation(libs.cmp.compose.material3)
-                implementation(libs.cmp.compose.foundation)
+                implementation(compose.ui)
+                implementation(compose.runtime)
+                implementation(compose.material3)
+                implementation(compose.foundation)
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
                 implementation("com.russhwolf:multiplatform-settings:1.3.0")
                 implementation("com.russhwolf:multiplatform-settings-no-arg:1.3.0")
-                implementation("org.jetbrains.compose.components:components-resources:1.9.3")
+                implementation(compose.components.resources)
             }
         }
     }
@@ -59,7 +59,7 @@ kotlin {
 
 android {
     namespace = "com.androidai.framework.theme.sandroid.ui"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig { minSdk = 24 }
 

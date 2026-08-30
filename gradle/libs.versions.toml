@@ -7,10 +7,10 @@ espressoCore = "3.6.1"
 appcompat = "1.5.0"
 material = "1.12.0"
 
-agp = "8.9.3"
-kotlin = "2.1.21"
+agp = "8.13.2"
+kotlin = "2.2.21"
 compose = "1.9.4"
-cmp-compose= "1.7.0"
+cmp-compose= "1.10.3"
 compose-material3 = "1.4.0"
 
 atomicfuVersion = "0.17.3"
@@ -26,7 +26,7 @@ composeActivity = "1.8.0"
 datastoreVersion = "1.1.0"
 securityCryptoKtx = "1.0.0"
 
-compose-multiplatform = "1.8.2"
+compose-multiplatform = "1.10.3"
 
 
 [libraries]
